@@ -729,6 +729,23 @@ input:focus-visible {
   display: flex;
   gap: 22px;
 }
+.footer-bottom .made-by {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+.footer-bottom .made-by:hover,
+.footer-bottom .made-by:focus-visible {
+  opacity: 1;
+}
+.made-by img {
+  display: block;
+  height: 30px;
+  width: auto;
+}
 dialog {
   border: 0;
   background: var(--paper);

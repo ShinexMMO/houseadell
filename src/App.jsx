@@ -449,6 +449,20 @@ function Footer() {
           <a href="/impressum">Impressum</a>
           <a href="/datenschutz">Datenschutz</a>
         </nav>
+        <a
+          className="made-by"
+          href="https://herzly.de"
+          target="_blank"
+          rel="noopener"
+        >
+          <span>Made by</span>
+          <img
+            src={asset("herzly-logo.png")}
+            alt="Herzly Marketing"
+            width="368"
+            height="132"
+          />
+        </a>
         <a href="#start">Nach oben</a>
       </div>
     </footer>
