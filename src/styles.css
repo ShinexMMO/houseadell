@@ -1483,3 +1483,36 @@ dialog::backdrop {
       linear-gradient(0deg, rgba(30, 24, 17, 0.68), transparent 82%);
   }
 }
+/* Instagram as icon (header, mobile menu, footer). */
+.instagram-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  transition: opacity 0.2s;
+}
+.instagram-link:hover {
+  opacity: 0.7;
+}
+.instagram-icon {
+  display: block;
+}
+.desktop-nav .instagram-link {
+  padding: 0;
+  margin-right: -12px;
+}
+.desktop-nav .instagram-link:after {
+  display: none;
+}
+.footer-links .instagram-link {
+  margin-right: -12px;
+}
+.mobile-nav .instagram-link {
+  justify-content: flex-start;
+  margin-top: 6px;
+}
+.mobile-nav .instagram-icon {
+  width: 26px;
+  height: 26px;
+}
