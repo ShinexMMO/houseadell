@@ -48,15 +48,24 @@ export function createSwirlRenderer(canvas, video) {
         float push = 1. + .018 * (1. - exp(-time / 2.5));
         p = (p - vec2(.5)) / push + vec2(.5);
         float edge = sin(p.x * 3.14159265) * sin(p.y * 3.14159265);
-        vec2 flow = .016 * vec2(
-          sin(p.y * 6.3 + time * .17) - sin(p.y * 6.3),
-          cos(p.x * 5.7 - time * .13) - cos(p.x * 5.7)
+        // Every term is zero at t=0, so the first canvas frame matches the
+        // video. Incommensurate speeds keep the motion from visibly repeating.
+        // Ease in over ~1.5s so the video's own motion hands over smoothly.
+        float ease = smoothstep(0., 1.5, time);
+        vec2 flow = .028 * vec2(
+          sin(p.y * 6.3 + time * .41) - sin(p.y * 6.3),
+          cos(p.x * 5.7 - time * .33) - cos(p.x * 5.7)
         );
-        flow += .008 * vec2(
-          sin(p.x * 8.1 + p.y * 3.4 - time * .113) - sin(p.x * 8.1 + p.y * 3.4),
-          sin(p.y * 7.4 - p.x * 4.2 + time * .151) - sin(p.y * 7.4 - p.x * 4.2)
+        flow += .014 * vec2(
+          sin(p.x * 8.1 + p.y * 3.4 - time * .29) - sin(p.x * 8.1 + p.y * 3.4),
+          sin(p.y * 7.4 - p.x * 4.2 + time * .37) - sin(p.y * 7.4 - p.x * 4.2)
         );
-        gl_FragColor = texture2D(picture, p + flow * edge);
+        // Fine streaks that keep the milk visibly drawing out.
+        flow += .005 * vec2(
+          sin(p.y * 14.7 + p.x * 2.3 + time * .63) - sin(p.y * 14.7 + p.x * 2.3),
+          cos(p.x * 12.9 - p.y * 3.1 - time * .57) - cos(p.x * 12.9 - p.y * 3.1)
+        );
+        gl_FragColor = texture2D(picture, p + flow * edge * ease);
       }
     `,
     );
