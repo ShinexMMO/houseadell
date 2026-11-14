@@ -21,6 +21,12 @@
 * {
   box-sizing: border-box;
 }
+/* Decorative twigs may bleed past the viewport; never let them widen the page.
+   `clip` (not `hidden`) keeps the sticky header working. */
+html,
+body {
+  overflow-x: clip;
+}
 body {
   margin: 0;
 }
