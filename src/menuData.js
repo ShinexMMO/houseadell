@@ -9,7 +9,7 @@ export const cafeInfo = {
   city: 'Rotenburg an der Fulda',
   telephone: '06623 9156506',
   telephoneHref: 'tel:+4966239156506',
-  instagram: 'https://www.instagram.com/adell.house/',
+  instagram: 'https://www.instagram.com/adell.house/?hl=de',
   facebook: 'https://www.facebook.com/house.adell/',
   hours: [
     { days: 'Montag', time: '09:00–17:00 Uhr' },

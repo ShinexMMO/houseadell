@@ -180,6 +180,7 @@ input:focus-visible {
 }
 .desktop-nav a {
   padding: 13px 0;
+  white-space: nowrap;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.12em;

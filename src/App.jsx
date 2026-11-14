@@ -45,9 +45,13 @@ function Header() {
   }, []);
   return (
     <header className="site-header">
-      <nav className="desktop-nav nav-left" aria-label="Café und Speisekarte">
+      <nav
+        className="desktop-nav nav-left"
+        aria-label="Café, Speisekarte und Einblicke"
+      >
         <a href="#unser-cafe">Unser Café</a>
         <a href="#speisekarte">Die Karte</a>
+        <a href="#einblicke">Einblicke</a>
       </nav>
       <a href="#start" className="brand" aria-label="House Adell – Startseite">
         <img
@@ -59,11 +63,13 @@ function Header() {
       </a>
       <nav
         className="desktop-nav nav-right"
-        aria-label="Einblicke, Veranstaltungen und Besuch"
+        aria-label="Veranstaltungen, Besuch und Instagram"
       >
-        <a href="#einblicke">Einblicke</a>
         <a href="#feiern">Feiern</a>
         <a href="#besuch">Besuch uns</a>
+        <a href={cafeInfo.instagram} target="_blank" rel="noopener">
+          Instagram
+        </a>
       </nav>
       <a className="mobile-menu-link" href="#speisekarte">
         Die Karte
@@ -94,6 +100,14 @@ function Header() {
               {label}
             </a>
           ))}
+          <a
+            href={cafeInfo.instagram}
+            target="_blank"
+            rel="noopener"
+            onClick={() => setOpen(false)}
+          >
+            Instagram
+          </a>
         </nav>
       )}
     </header>
