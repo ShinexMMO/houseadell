@@ -59,51 +59,6 @@
 .menu-tab-active:hover {
   border-bottom-color: var(--ink);
 }
-.menu-search {
-  max-width: 440px;
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  margin: 25px auto 0;
-  border-bottom: 1px solid #35483d55;
-  min-height: 45px;
-}
-.menu-search label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-.menu-search input {
-  min-width: 0;
-  flex: 1;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  font: 400 12px/1.5 var(--body);
-  padding: 12px 0;
-  min-height: 44px;
-}
-.menu-search input::-webkit-search-cancel-button {
-  display: none;
-}
-.menu-search input::placeholder {
-  color: #656e60;
-}
-.menu-search input:focus {
-  outline: none;
-}
-.menu-search:focus-within {
-  border-color: var(--ink);
-  box-shadow: 0 1px 0 var(--ink);
-}
-.menu-search > button {
-  background: none;
-  border: 0;
-  text-decoration: underline;
-  font-size: 10px;
-  min-height: 44px;
-  padding: 10px 0;
-}
 .menu-paper {
   padding: 0 50px;
 }
@@ -202,10 +157,6 @@
   margin-top: 40px;
   padding-top: 35px;
 }
-.menu-search-count {
-  font-size: 12px;
-  margin-bottom: 30px;
-}
 .menu-bottom {
   border-top: 1px solid #35483d55;
   margin-top: 40px;
@@ -233,28 +184,6 @@
   border-bottom: 1px solid var(--ink);
   min-height: 44px;
 }
-.menu-empty {
-  text-align: center;
-  max-width: 500px;
-  margin: 40px auto 60px;
-}
-.menu-empty h3 {
-  font: 500 36px/1.1 var(--display);
-  text-transform: uppercase;
-  margin-bottom: 18px;
-}
-.menu-empty p {
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-.menu-empty button {
-  border: 1px solid var(--ink);
-  background: var(--ink);
-  color: var(--paper);
-  padding: 13px 20px;
-  font-size: 12px;
-  min-height: 46px;
-}
 .menu-sr-only {
   position: absolute;
   width: 1px;
@@ -264,9 +193,7 @@
   white-space: nowrap;
 }
 .menu-tab:focus-visible,
-.menu-download:focus-visible,
-.menu-search button:focus-visible,
-.menu-empty button:focus-visible {
+.menu-download:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 4px;
 }
@@ -360,16 +287,6 @@
     font-size: 24px;
     padding: 15px 0 13px;
     flex-shrink: 0;
-  }
-  .menu-search {
-    gap: 12px;
-    margin-top: 20px;
-  }
-  .menu-search label {
-    font-size: 10px;
-  }
-  .menu-search input {
-    font-size: 16px;
   }
   .menu-controls {
     margin-bottom: 32px;

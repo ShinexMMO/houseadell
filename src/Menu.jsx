@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { menuCategories, menuNotes } from "./menuData.js";
 import "./menu.css";
 import Botanical from "./Botanical.jsx";
@@ -23,16 +23,6 @@ const currency = new Intl.NumberFormat("de-DE", {
   style: "currency",
   currency: "EUR",
 });
-const normalize = (text = "") =>
-  String(text)
-    .toLocaleLowerCase("de-DE")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/ß/g, "ss");
-const matches = (item, query) =>
-  normalize(
-    `${item.name} ${item.description || ""} ${item.note || ""}`,
-  ).includes(query);
 
 function MenuItem({ item }) {
   return (
@@ -62,8 +52,6 @@ function MenuItem({ item }) {
 
 export default function Menu() {
   const [activeTab, setActiveTab] = useState("breakfast");
-  const [search, setSearch] = useState("");
-  const query = normalize(search.trim());
   const selectedTab = tabs.find((tab) => tab.id === activeTab);
   const activeCategories = selectedTab.categories;
 
@@ -71,7 +59,6 @@ export default function Menu() {
     function selectFromFavorite(event) {
       if (!tabs.some((tab) => tab.id === event.detail)) return;
       setActiveTab(event.detail);
-      setSearch("");
     }
 
     window.addEventListener("adell-menu-select", selectFromFavorite);
@@ -79,18 +66,8 @@ export default function Menu() {
       window.removeEventListener("adell-menu-select", selectFromFavorite);
   }, []);
 
-  const visibleCategories = useMemo(
-    () =>
-      menuCategories.flatMap((category) => {
-        if (!query)
-          return activeCategories.includes(category.id) ? [category] : [];
-        const items = category.items.filter((item) => matches(item, query));
-        const extras = category.extras?.filter((item) => matches(item, query));
-        return items.length || extras?.length
-          ? [{ ...category, items, extras }]
-          : [];
-      }),
-    [activeCategories, query],
+  const visibleCategories = menuCategories.filter((category) =>
+    activeCategories.includes(category.id),
   );
 
   const resultCount = visibleCategories.reduce(
@@ -98,11 +75,6 @@ export default function Menu() {
       count + category.items.length + (category.extras?.length || 0),
     0,
   );
-
-  function chooseTab(id) {
-    setActiveTab(id);
-    setSearch("");
-  }
 
   return (
     <section
@@ -130,36 +102,16 @@ export default function Menu() {
           >
             {tabs.map(({ id, label }) => (
               <button
-                className={`menu-tab${activeTab === id && !query ? " menu-tab-active" : ""}`}
+                className={`menu-tab${activeTab === id ? " menu-tab-active" : ""}`}
                 type="button"
-                aria-pressed={activeTab === id && !query}
+                aria-pressed={activeTab === id}
                 aria-controls="menu-results"
                 key={id}
-                onClick={() => chooseTab(id)}
+                onClick={() => setActiveTab(id)}
               >
                 {label}
               </button>
             ))}
-          </div>
-          <div className="menu-search">
-            <label htmlFor="menu-search">Suchen</label>
-            <input
-              id="menu-search"
-              type="search"
-              placeholder="Zum Beispiel Cappuccino oder Avocado"
-              aria-controls="menu-results"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-            />
-            {search && (
-              <button
-                type="button"
-                onClick={() => setSearch("")}
-                aria-label="Suche leeren"
-              >
-                Leeren
-              </button>
-            )}
           </div>
         </div>
 
@@ -169,61 +121,41 @@ export default function Menu() {
           aria-live="polite"
           aria-atomic="true"
         >
-          {query
-            ? `${resultCount} Treffer für „${search.trim()}“ in der gesamten Karte`
-            : `${selectedTab.label}: ${resultCount} Einträge angezeigt`}
+          {`${selectedTab.label}: ${resultCount} Einträge angezeigt`}
         </p>
         <div className="menu-paper" id="menu-results">
-          {query && (
-            <p className="menu-search-count">
-              {resultCount} Treffer für „{search.trim()}“ in der gesamten Karte
-            </p>
-          )}
-          {visibleCategories.length ? (
-            visibleCategories.map((category) => (
-              <div className="menu-category" key={category.id}>
-                <div className="menu-category-intro">
-                  <h3>{category.label}</h3>
-                  {category.description && <p>{category.description}</p>}
-                </div>
-                {category.items.length > 0 && (
-                  <ul className="menu-items">
-                    {category.items.map((item, index) => (
-                      <MenuItem key={`${item.name}-${index}`} item={item} />
+          {visibleCategories.map((category) => (
+            <div className="menu-category" key={category.id}>
+              <div className="menu-category-intro">
+                <h3>{category.label}</h3>
+                {category.description && <p>{category.description}</p>}
+              </div>
+              {category.items.length > 0 && (
+                <ul className="menu-items">
+                  {category.items.map((item, index) => (
+                    <MenuItem key={`${item.name}-${index}`} item={item} />
+                  ))}
+                </ul>
+              )}
+              {category.extras?.length > 0 && (
+                <div className="menu-extras">
+                  <span className="menu-extras-title">Noch etwas dazu?</span>
+                  <ul>
+                    {category.extras.map((extra, index) => (
+                      <li key={`${extra.name}-${index}`}>
+                        <span>{extra.name}</span>
+                        <span>
+                          {typeof extra.price === "number"
+                            ? currency.format(extra.price)
+                            : extra.price}
+                        </span>
+                      </li>
                     ))}
                   </ul>
-                )}
-                {category.extras?.length > 0 && (
-                  <div className="menu-extras">
-                    <span className="menu-extras-title">Noch etwas dazu?</span>
-                    <ul>
-                      {category.extras.map((extra, index) => (
-                        <li key={`${extra.name}-${index}`}>
-                          <span>{extra.name}</span>
-                          <span>
-                            {typeof extra.price === "number"
-                              ? currency.format(extra.price)
-                              : extra.price}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ))
-          ) : (
-            <div className="menu-empty">
-              <h3>Noch nicht das Richtige gefunden?</h3>
-              <p>
-                Für „{search.trim()}“ gibt es keinen Eintrag. Versuch es zum
-                Beispiel mit „Cappuccino“, „Avocado“ oder „Toast“.
-              </p>
-              <button type="button" onClick={() => setSearch("")}>
-                Zurück zur Karte
-              </button>
+                </div>
+              )}
             </div>
-          )}
+          ))}
 
           <div className="menu-bottom">
             <div className="menu-notes">
