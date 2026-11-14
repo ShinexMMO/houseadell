@@ -417,7 +417,6 @@ function Visit() {
 }
 
 function Footer() {
-  const ref = useRef(null);
   return (
     <footer className="footer">
       <Botanical side="right" className="botanical-footer" />
@@ -446,58 +445,17 @@ function Footer() {
       </div>
       <div className="footer-bottom wrap">
         <p>© {new Date().getFullYear()} House Adell</p>
-        <button type="button" onClick={() => ref.current.showModal()}>
-          Kontakt & Hinweise
-        </button>
+        <nav className="footer-legal" aria-label="Rechtliches">
+          <a href="/impressum">Impressum</a>
+          <a href="/datenschutz">Datenschutz</a>
+        </nav>
         <a href="#start">Nach oben</a>
       </div>
-      <dialog
-        className="info-dialog"
-        ref={ref}
-        aria-labelledby="info-title"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) ref.current.close();
-        }}
-      >
-        <button
-          className="dialog-close"
-          type="button"
-          onClick={() => ref.current.close()}
-        >
-          Schließen
-        </button>
-        <h2 id="info-title">Kontakt & Hinweise</h2>
-        <p>
-          House Adell
-          <br />
-          Marktplatz 16
-          <br />
-          36199 Rotenburg an der Fulda
-        </p>
-        <p>
-          <a href={cafeInfo.telephoneHref}>{cafeInfo.telephone}</a>
-        </p>
-        <p>
-          Lokale Designvorschau. Preise, Öffnungszeiten und vollständige
-          rechtliche Betreiberangaben werden vor dem öffentlichen Start
-          bestätigt.
-        </p>
-        <p>
-          Diese Website verwendet keine Analyse- oder Marketing-Cookies.
-          Instagram und Google Maps sind externe Angebote.
-        </p>
-      </dialog>
     </footer>
   );
 }
 
 export default function App() {
-  useEffect(() => {
-    const id = window.location.hash.slice(1);
-    if (!id) return;
-    document.getElementById(id)?.scrollIntoView({ behavior: "instant" });
-  }, []);
-
   return (
     <>
       <a className="skip-link" href="#main-content">

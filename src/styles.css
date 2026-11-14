@@ -725,6 +725,10 @@ input:focus-visible {
 .footer-bottom a {
   padding: 13px 0;
 }
+.footer-legal {
+  display: flex;
+  gap: 22px;
+}
 dialog {
   border: 0;
   background: var(--paper);
@@ -1374,7 +1378,7 @@ dialog::backdrop {
   .footer-bottom p {
     flex-basis: 100%;
   }
-  .footer-bottom a {
+  .footer-bottom > a {
     margin-left: auto;
   }
   .photo-dialog {
