@@ -1,0 +1,146 @@
+.events-section {
+  background: #eaded4;
+  padding: 76px 0;
+  overflow: clip;
+}
+.events-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1fr);
+  gap: clamp(40px, 6vw, 88px);
+  align-items: center;
+}
+.events-photo {
+  align-self: stretch;
+  min-height: 530px;
+  position: relative;
+}
+.events-photo img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.events-copy {
+  position: relative;
+  isolation: isolate;
+  padding: 15px 0;
+}
+.events-copy > :not(.botanical) {
+  position: relative;
+  z-index: 1;
+}
+.events-service {
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+.events-copy h2 {
+  font-size: clamp(60px, 6.4vw, 92px);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  margin-bottom: 23px;
+}
+.events-invitation {
+  font-size: clamp(27px, 2.5vw, 36px);
+  max-width: 430px;
+  margin-bottom: 23px;
+}
+.events-description {
+  max-width: 470px;
+  font-size: 14px;
+  line-height: 1.75;
+}
+.events-description + .events-description {
+  margin-top: 15px;
+}
+.events-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin-top: 24px;
+}
+.events-phone {
+  font-family: var(--display);
+  font-size: 38px;
+  font-weight: 500;
+  line-height: 1.2;
+  padding: 4px 0;
+}
+.events-call {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  padding: 14px 21px;
+}
+.botanical-events {
+  right: -75px;
+  bottom: -45px;
+  width: 205px;
+  opacity: 0.4;
+  transform: rotate(-19deg);
+}
+@media (max-width: 1000px) {
+  .events-layout {
+    gap: 38px;
+  }
+  .events-copy h2 {
+    font-size: clamp(52px, 7vw, 72px);
+  }
+  .events-invitation {
+    font-size: 29px;
+  }
+  .botanical-events {
+    width: 155px;
+    right: -42px;
+  }
+}
+@media (max-width: 700px) {
+  .events-section {
+    padding: 46px 0;
+  }
+  .events-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: stretch;
+  }
+  .events-copy {
+    order: -1;
+    padding: 0;
+  }
+  .events-service {
+    font-size: 12px;
+    margin-bottom: 17px;
+  }
+  .events-copy h2 {
+    font-size: clamp(58px, 15vw, 84px);
+    margin-bottom: 22px;
+  }
+  .events-invitation {
+    font-size: 31px;
+    max-width: 340px;
+    margin-bottom: 20px;
+  }
+  .events-description {
+    max-width: 520px;
+  }
+  .events-contact {
+    margin-top: 20px;
+  }
+  .events-phone {
+    font-size: 38px;
+  }
+  .events-photo {
+    min-height: 0;
+    aspect-ratio: 1.15;
+  }
+  .events-photo img {
+    object-position: center 58%;
+  }
+  .botanical-events {
+    right: -40px;
+    bottom: -18px;
+    width: 140px;
+    opacity: 0.3;
+  }
+}

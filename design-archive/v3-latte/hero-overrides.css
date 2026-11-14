@@ -1,0 +1,35 @@
+/* The film moves from the glass into an edge-to-edge liquid texture. */
+.hero-latte {
+  height: calc(100svh - 112px);
+  min-height: 590px;
+  background: #68684f;
+}
+.hero-latte .hero-poster,
+.hero-latte .hero-video {
+  object-position: 62% center;
+}
+.hero-latte .hero-shade {
+  background:
+    linear-gradient(90deg, rgba(30, 24, 17, 0.48), rgba(30, 24, 17, 0.04) 68%),
+    linear-gradient(0deg, rgba(30, 24, 17, 0.6), transparent 60%);
+}
+@media (max-width: 800px) {
+  .hero-latte {
+    height: calc(100svh - 90px);
+  }
+}
+@media (max-width: 600px) {
+  .hero-latte {
+    height: calc(100svh - 84px);
+    max-height: none;
+  }
+  .hero-latte .hero-poster,
+  .hero-latte .hero-video {
+    object-position: 78% center;
+  }
+  .hero-latte .hero-shade {
+    background:
+      linear-gradient(90deg, rgba(30, 24, 17, 0.3), rgba(30, 24, 17, 0.04)),
+      linear-gradient(0deg, rgba(30, 24, 17, 0.68), transparent 82%);
+  }
+}

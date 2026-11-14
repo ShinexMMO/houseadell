@@ -1,0 +1,19 @@
+{
+  "params": {
+    "model": "seedance_2_5",
+    "mode": "omni_reference",
+    "medias": [
+      {
+        "role": "start_image",
+        "value": "ef7493f0-e169-4346-b171-b29bd002c172"
+      }
+    ],
+    "aspect_ratio": "16:9",
+    "duration": 14,
+    "resolution": "720p",
+    "generate_audio": false,
+    "use_unlim": true,
+    "count": 1,
+    "prompt": "Continue from this exact starting photograph. Preserve the same short decorative clear glass with horizontal rings, the wooden saucer, marble tabletop and authentic warm cafe interior. ONE CONTINUOUS 14-second premium coffee commercial shot. This glass already contains WHITE MILK. Seconds 0-5: a thin dark ESPRESSO stream falls vertically from OFFSCREEN ABOVE directly into the milk. Espresso creates beautiful caramel ribbons, curling tan clouds and delicate ivory tendrils through the white milk. Believable slow fluid dynamics, slight rise in level, no overflow, no hands, no pouring vessel. From second 3 to second 12: a continuous slow smooth optical DOLLY-IN aimed through the clear middle SIDE of the glass at the mixing boundary. Keep the fluid detail in focus. As the camera moves forward the rim, decorated lower bands, both sides of the glass, saucer, table and cafe background ALL move out beyond the frame. Final seconds 12-14: EXTREME MACRO of ivory milk clouds and fine caramel espresso veins fills the ENTIRE FRAME, edge to edge. ONLY beautiful flowing coffee-and-milk marbling is visible, no glass edges or room. Ease gently to a stop inside the liquid. Rich ivory, caramel, warm coffee browns; luxurious natural side light. No cut, no dissolve, no morph, no pullback, no flat uniform brown, no text or logo. Espresso must enter existing white milk from ABOVE, never milk into coffee."
+  }
+}

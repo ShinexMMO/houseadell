@@ -1,0 +1,14 @@
+<!doctype html><html lang="de"><meta charset="utf-8"><title>House Adell – Wiedergabeprüfung</title>
+<style>body{margin:0;background:#15392b;color:#fff;font:13px monospace}#stats{height:90px;white-space:pre;margin:0;padding:10px;box-sizing:border-box}iframe{width:100%;height:calc(100vh - 90px);border:0}</style>
+<pre id="stats">Lade Wiedergabedaten …</pre><iframe src="/" title="House Adell Vorschau"></iframe>
+<script>
+const frame=document.querySelector('iframe'), stats=document.querySelector('#stats');
+const records=new Map();
+function track(video,index){
+ const r={index,frames:0,maxGap:0,lastTime:0,wraps:0,lastMedia:0,pauses:0,playingEvents:0,waits:0}; records.set(video,r);
+ video.addEventListener('pause',()=>r.pauses++);video.addEventListener('playing',()=>r.playingEvents++);video.addEventListener('waiting',()=>r.waits++);
+ function tick(now,meta){if(r.lastTime)r.maxGap=Math.max(r.maxGap,now-r.lastTime);if(meta.mediaTime<r.lastMedia-.5)r.wraps++;r.lastTime=now;r.lastMedia=meta.mediaTime;r.frames++;video.requestVideoFrameCallback(tick)}
+ video.requestVideoFrameCallback?.(tick);
+}
+setInterval(()=>{const videos=[...frame.contentDocument.querySelectorAll('video')];videos.forEach((v,i)=>{if(!records.has(v))track(v,i)});stats.textContent=videos.map(v=>{const r=records.get(v),q=v.getVideoPlaybackQuality?.();return `${r.index}: t=${v.currentTime.toFixed(2)} / ${v.duration?.toFixed(2)} paused=${v.paused} ended=${v.ended} opacity=${frame.contentWindow.getComputedStyle(v).opacity} frames=${r.frames} wraps=${r.wraps} pauseEvents=${r.pauses} playingEvents=${r.playingEvents} waiting=${r.waits} dropped=${q?.droppedVideoFrames} maxGap=${Math.round(r.maxGap)}ms`}).join('\n'); const c=frame.contentDocument.querySelector('canvas'), f=c?.swirlStats; if(f) stats.textContent+=`\nFlow: running=${f.running} frames=${f.frames} t=${f.seconds.toFixed(2)} maxGap=${Math.round(f.maxGap)}ms opacity=${frame.contentWindow.getComputedStyle(c).opacity}`},250);
+</script></html>
