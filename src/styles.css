@@ -528,6 +528,22 @@ input:focus-visible {
 .illustration-olive {
   background-position: 100% 100%;
 }
+/* Line drawings taken from the printed menu (Menu 6.pdf, page 1). */
+.illustration-cups,
+.illustration-coffee-bag,
+.illustration-coffee-plant {
+  background-size: contain;
+  background-position: center;
+}
+.illustration-cups {
+  background-image: url("/assets/menu-icon-cups.svg");
+}
+.illustration-coffee-bag {
+  background-image: url("/assets/menu-icon-coffee-bag.svg");
+}
+.illustration-coffee-plant {
+  background-image: url("/assets/menu-icon-coffee-plant.svg");
+}
 .food-story:hover .adell-illustration {
   transform: rotate(-8deg);
 }
@@ -1538,6 +1554,15 @@ dialog::backdrop {
   aspect-ratio: 16 / 9;
   overflow: hidden;
   background: #354d40;
+  border-radius: 22px;
+  /* keeps the rounded clip on the video in Safari */
+  isolation: isolate;
+  transform: translateZ(0);
+}
+@media (max-width: 600px) {
+  .visit-video {
+    border-radius: 16px;
+  }
 }
 .visit-video video {
   display: block;

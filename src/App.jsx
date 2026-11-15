@@ -165,7 +165,7 @@ function Welcome() {
     {
       title: "Frühstück",
       image: "fruehstueck.webp",
-      icon: "croissant",
+      icon: "cups",
       filter: "breakfast",
       note: "Für frühe Vögel. Und alle anderen.",
       alt: "Sauerteigbrot mit Ei, Rucola und Käse",
@@ -173,7 +173,7 @@ function Welcome() {
     {
       title: "Kaffee",
       image: "cappuccino.webp",
-      icon: "coffee",
+      icon: "coffee-bag",
       filter: "coffee",
       note: "Regional geröstet. Mit Ruhe genießen.",
       alt: "Cappuccino mit Latte Art auf einem Cafétisch",
@@ -181,7 +181,7 @@ function Welcome() {
     {
       title: "Süßes",
       image: "schokokuchen.webp",
-      icon: "cake",
+      icon: "coffee-plant",
       filter: "sweet",
       note: "Hausgemacht ist immer eine gute Idee.",
       alt: "Ein Stück hausgemachter Schokoladenkuchen",
