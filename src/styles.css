@@ -268,7 +268,7 @@ input:focus-visible {
 }
 .welcome-intro,
 .food-grid,
-.about-copy > :not(.botanical),
+.about-copy > :not(.botanical):not(.marigold),
 .visit-heading,
 .visit-grid,
 .footer-top,
@@ -1570,5 +1570,140 @@ dialog::backdrop {
   }
   .visit-intro .visit-heading h2 {
     font-size: clamp(98px, 26vw, 140px);
+  }
+}
+/* Hero headline in the Bilal brush script (mixed case reads better than caps). */
+.hero.hero-latte h1 {
+  font-family: "Bilal", var(--display);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.02;
+  text-shadow: 0 2px 22px rgba(30, 24, 17, 0.35);
+}
+.hero.hero-latte h1 {
+  position: relative;
+  top: 44px;
+  padding: 0.45em;
+  margin: -0.45em;
+  filter: url(#bilal-thin);
+}
+.svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+@media (max-width: 600px) {
+  .hero.hero-latte h1 {
+    top: 32px;
+    filter: url(#bilal-thin-sm);
+  }
+}
+/* Hanging marigold garlands (genda phool) – Sophia's Indian roots. */
+.marigold {
+  position: absolute;
+  top: 0;
+  z-index: 0;
+  height: auto;
+  pointer-events: none;
+  transform-origin: 50% 0;
+}
+.marigold-about {
+  right: 40px;
+  width: 64px;
+}
+.marigold-about-2 {
+  right: 104px;
+  width: 52px;
+}
+.marigold-menu {
+  left: 6%;
+  width: 60px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .marigold {
+    animation: marigold-sway 7s ease-in-out infinite alternate;
+  }
+  .marigold-about-2 {
+    animation-duration: 8.5s;
+    animation-delay: -3s;
+  }
+}
+@keyframes marigold-sway {
+  from {
+    transform: rotate(-1.6deg);
+  }
+  to {
+    transform: rotate(1.6deg);
+  }
+}
+@media (max-width: 800px) {
+  .marigold-about {
+    right: 14px;
+    width: 40px;
+  }
+  .marigold-about-2 {
+    right: 56px;
+    width: 32px;
+  }
+  .marigold-menu {
+    left: 10px;
+    width: 36px;
+  }
+}
+/* Section headings in the thinned Bilal brush script, matching the hero. */
+body h2.script-heading {
+  font-family: "Bilal", var(--display);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.05;
+}
+/* WebKit clips CSS filters to the element box, and Bilal's swashes reach well
+   outside it. Pad the filtered box and cancel the padding with negative margins
+   so the layout is unchanged but every stroke stays inside the filter. */
+.script-ink {
+  display: inline-block;
+  padding: 0.45em 0.45em;
+  margin: -0.45em -0.45em;
+  filter: url(#bilal-thin);
+}
+@media (max-width: 600px) {
+  .script-ink {
+    filter: url(#bilal-thin-sm);
+  }
+}
+/* Give the big "B" of "Bis" room below the serif line. */
+.visit-intro .visit-heading .serif {
+  margin-bottom: 1.3em;
+}
+@media (min-width: 801px) {
+  .visit-intro .visit-heading .serif {
+    margin-bottom: 1.5em;
+  }
+}
+/* Golden Temple line drawing in Sophia's story. */
+.golden-temple {
+  margin: 6px 0 26px;
+  width: min(300px, 80%);
+}
+.golden-temple svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.golden-temple figcaption {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  color: #8a6420;
+  margin-top: 2px;
+  padding-left: 8px;
+}
+@media (max-width: 600px) {
+  .golden-temple {
+    width: min(260px, 82%);
   }
 }

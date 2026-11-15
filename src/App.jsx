@@ -3,6 +3,8 @@ import Menu from "./Menu.jsx";
 import Hero from "./Hero.jsx";
 import Events from "./Events.jsx";
 import Botanical from "./Botanical.jsx";
+import Marigold from "./Marigold.jsx";
+import GoldenTemple from "./GoldenTemple.jsx";
 import { cafeInfo } from "./menuData.js";
 import "./newspaper.css";
 
@@ -41,6 +43,21 @@ function InstagramIcon() {
       <rect x="3" y="3" width="18" height="18" rx="5" />
       <circle cx="12" cy="12" r="4.2" />
       <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+// Bilal ships in one weight; these filters thin its strokes slightly.
+// The filter region is generous so brush swashes are never clipped.
+function BilalFilters() {
+  return (
+    <svg className="svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
+      <filter id="bilal-thin" x="-25%" y="-40%" width="150%" height="180%">
+        <feMorphology operator="erode" radius="0.7" />
+      </filter>
+      <filter id="bilal-thin-sm" x="-25%" y="-40%" width="150%" height="180%">
+        <feMorphology operator="erode" radius="0.4" />
+      </filter>
     </svg>
   );
 }
@@ -237,17 +254,25 @@ function About() {
     <section className="about" id="unser-cafe" aria-labelledby="about-title">
       <div className="about-copy">
         <p className="section-label">House Adell, seit 2021</p>
-        <h2 id="about-title">
-          Ein Stück Welt.
-          <br />
-          Mitten in
-          <br />
-          Rotenburg.
+        <h2 id="about-title" className="script-heading">
+          <span className="script-ink">
+            Ein Stück Welt.
+            <br />
+            Mitten in
+            <br />
+            Rotenburg.
+          </span>
         </h2>
         <p>
           Nach Stationen in Marbella, London und München hat Sophia Kaur ihren
           Lieblingsort dort eröffnet, wo sie zuhause ist.
         </p>
+        <p>
+          Ihre Wurzeln liegen im Punjab, der Heimat des Goldenen Tempels von
+          Amritsar und einer der lebendigsten Streetfood-Kulturen Indiens. Ein
+          bisschen davon steckt in unserem Chai und im Masala auf der Karte.
+        </p>
+        <GoldenTemple className="about-temple" />
         <p>
           Internationale Frühstücksideen treffen auf den Rotenburger Marktplatz.
           Dazu viel Hausgemachtes, grüne Ecken und ein Platz, an dem man gern
@@ -257,6 +282,8 @@ function About() {
           Lern uns kennen
         </a>
         <Botanical side="right" className="botanical-about" />
+        <Marigold className="marigold-about" count={6} seed={3} />
+        <Marigold className="marigold-about marigold-about-2" count={4} seed={11} />
       </div>
       <div className="about-photo">
         <img
@@ -425,7 +452,7 @@ function VisitVideo() {
       <video
         ref={ref}
         src={asset("coffee-moment.mp4")}
-        poster={asset("cappuccino-video-startframe.webp")}
+        poster={asset("coffee-moment-poster.jpg")}
         muted
         playsInline
         preload="none"
@@ -444,7 +471,9 @@ function Visit() {
       <div className="visit-intro">
         <div className="visit-heading">
           <p className="serif">Der Kaffee ist gleich fertig.</p>
-          <h2 id="visit-title">Bis gleich.</h2>
+          <h2 id="visit-title" className="script-heading">
+            <span className="script-ink">Bis gleich.</span>
+          </h2>
         </div>
         <VisitVideo />
       </div>
@@ -566,6 +595,7 @@ export default function App() {
       <a className="skip-link" href="#main-content">
         Zum Inhalt
       </a>
+      <BilalFilters />
       <Header />
       <main id="main-content">
         <Hero />

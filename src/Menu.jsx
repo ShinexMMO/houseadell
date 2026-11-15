@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { menuCategories, menuNotes } from "./menuData.js";
 import "./menu.css";
 import Botanical from "./Botanical.jsx";
+import Marigold, { MarigoldMark } from "./Marigold.jsx";
 
 const tabs = [
   { id: "breakfast", label: "Frühstück", categories: ["breakfast"] },
@@ -39,8 +40,14 @@ function MenuItem({ item }) {
       {item.description && (
         <p className="menu-item-description">{item.description}</p>
       )}
-      {(item.vegetarian || item.organic || item.note) && (
+      {(item.vegetarian || item.organic || item.note || item.indian) && (
         <div className="menu-item-details">
+          {item.indian && (
+            <span className="menu-indian">
+              <MarigoldMark />
+              Indisch inspiriert
+            </span>
+          )}
           {item.vegetarian && <span className="menu-diet">Vegetarisch</span>}
           {item.organic && <span className="menu-diet">Bio</span>}
           {item.note && <span className="menu-item-note">{item.note}</span>}
@@ -83,9 +90,12 @@ export default function Menu() {
       aria-labelledby="menu-title"
     >
       <Botanical side="right" className="botanical-menu" />
+      <Marigold className="marigold-menu" count={8} seed={7} />
       <div className="menu-wrap">
         <div className="menu-intro">
-          <h2 id="menu-title">Die Karte.</h2>
+          <h2 id="menu-title" className="script-heading">
+            <span className="script-ink">Die Karte.</span>
+          </h2>
           <p className="menu-subtitle">Früh anfangen. Lange genießen.</p>
           <p>
             Frühstücksplatten bis 12 Uhr.
@@ -143,7 +153,15 @@ export default function Menu() {
                   <ul>
                     {category.extras.map((extra, index) => (
                       <li key={`${extra.name}-${index}`}>
-                        <span>{extra.name}</span>
+                        <span>
+                          {extra.name}
+                          {extra.indian && (
+                            <span className="menu-indian-inline" title="Indisch inspiriert">
+                              <MarigoldMark />
+                              <span className="menu-sr-only">(indisch inspiriert)</span>
+                            </span>
+                          )}
+                        </span>
                         <span>
                           {typeof extra.price === "number"
                             ? currency.format(extra.price)
@@ -159,6 +177,11 @@ export default function Menu() {
 
           <div className="menu-bottom">
             <div className="menu-notes">
+              <p className="menu-indian-legend">
+                <MarigoldMark />
+                Indisch inspiriert: Chai, Masala, Mango und Kardamom, ein
+                Stück von Sophias Wurzeln auf der Karte.
+              </p>
               {menuNotes.map((note, index) => (
                 <p key={index}>{note}</p>
               ))}

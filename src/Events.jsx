@@ -21,10 +21,12 @@ export default function Events() {
         </div>
         <div className="events-copy">
           <p className="events-service">Veranstaltungen & Catering</p>
-          <h2 id="events-title">
-            Dein Anlass.
-            <br />
-            Unser Adell.
+          <h2 id="events-title" className="script-heading">
+            <span className="script-ink">
+              Dein Anlass.
+              <br />
+              Unser Adell.
+            </span>
           </h2>
           <p className="events-invitation serif">
             Bring deine Lieblingsmenschen mit.

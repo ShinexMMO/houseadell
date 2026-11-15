@@ -341,3 +341,29 @@
     transition: none;
   }
 }
+
+/* Indian-inspired dishes */
+.menu-indian {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #a85614;
+  font-weight: 500;
+}
+.menu-indian-inline {
+  display: inline-flex;
+  vertical-align: -2px;
+  margin-left: 6px;
+}
+.menu-indian-legend {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  color: #a85614 !important;
+}
+.marigold-mark {
+  flex-shrink: 0;
+}
+.menu-indian-legend .marigold-mark {
+  margin-top: 0.3em;
+}
