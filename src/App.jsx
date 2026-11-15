@@ -399,13 +399,54 @@ function Gallery() {
   );
 }
 
+// Plays once when scrolled into view and rests on the close-up end frame.
+// No autoplay with reduced motion; the poster is the first frame.
+function VisitVideo() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!video.ended) video.play().catch(() => {});
+        } else if (!video.paused) {
+          video.pause();
+        }
+      },
+      { threshold: 0.45 },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+  return (
+    <figure className="visit-video">
+      <video
+        ref={ref}
+        src={asset("coffee-moment.mp4")}
+        poster={asset("cappuccino-video-startframe.webp")}
+        muted
+        playsInline
+        preload="none"
+        width="1280"
+        height="720"
+        aria-label="Ein Cappuccino mit Latte-Art auf einem Marmortisch im House Adell, vor grüner Rosentapete und rosa Sitzbank."
+      />
+    </figure>
+  );
+}
+
 function Visit() {
   return (
     <section className="visit wrap" id="besuch" aria-labelledby="visit-title">
       <Botanical className="botanical-visit" />
-      <div className="visit-heading">
-        <p className="serif">Der Kaffee ist gleich fertig.</p>
-        <h2 id="visit-title">Bis gleich.</h2>
+      <div className="visit-intro">
+        <div className="visit-heading">
+          <p className="serif">Der Kaffee ist gleich fertig.</p>
+          <h2 id="visit-title">Bis gleich.</h2>
+        </div>
+        <VisitVideo />
       </div>
       <div className="visit-grid">
         <div>
